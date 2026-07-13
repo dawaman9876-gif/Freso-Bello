@@ -4,31 +4,31 @@ import { motion, AnimatePresence } from 'motion/react';
 const SPONSORS = [
   { 
     name: 'Ethiopian Airlines', 
-    logo: 'input_file_4.png',
+    logo: '12.png',
     photo: 'https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=800',
     description: 'Official In-flight Culinary Partner'
   },
   { 
     name: 'Hilton Addis Ababa', 
-    logo: 'input_file_3.png',
+    logo: '23.png',
     photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800',
     description: 'Preferred Luxury Hospitality Supplier'
   },
   { 
     name: 'Sheraton Addis', 
-    logo: 'input_file_2.png',
+    logo: '34.png',
     photo: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=800',
     description: 'Exclusive Banquet Pasta Provider'
   },
   { 
     name: 'Hyatt Regency', 
-    logo: 'input_file_0.png',
+    logo: '45.png',
     photo: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800',
     description: 'Artisanal Selection for Signature Dining'
   },
   { 
     name: 'Emirates', 
-    logo: 'input_file_1.png',
+    logo: '56.jpg',
     photo: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800',
     description: 'Global Export Logistics Associate'
   },
