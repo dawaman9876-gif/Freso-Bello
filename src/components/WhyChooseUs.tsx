@@ -11,6 +11,15 @@ const iconMap = {
   ChefHat: ChefHat,
 };
 
+const CARD_IMAGES = [
+  'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&q=80&w=800', // Precision
+  'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800', // Scale
+  'https://images.unsplash.com/photo-1595187123982-f59787e91f09?auto=format&fit=crop&q=80&w=800', // Organic
+  'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=800', // Certified
+  'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800', // Strategic
+  'https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=800', // Empower
+];
+
 export default function WhyChooseUs() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -70,6 +79,15 @@ export default function WhyChooseUs() {
                   isWide ? 'md:col-span-7' : 'md:col-span-5'
                 }`}
               >
+                {/* Background Image Overlay */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-1000">
+                  <img 
+                    src={CARD_IMAGES[index]} 
+                    alt="" 
+                    className="w-full h-full object-cover grayscale"
+                  />
+                </div>
+
                 {/* Background Ornament */}
                 <div className="absolute -top-20 -right-20 w-64 h-64 bg-brand-gold/5 rounded-full blur-3xl group-hover:bg-brand-gold/10 transition-colors duration-700"></div>
 

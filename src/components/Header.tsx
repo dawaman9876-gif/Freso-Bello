@@ -48,7 +48,7 @@ export default function Header({ cartCount, onOpenCart, isDarkMode, toggleTheme 
             <a href="#" className="flex items-center gap-3 group">
               <div className="w-10 h-10 overflow-hidden transition-transform duration-500 group-hover:rotate-12">
                 <img
-                  src="/logos/brand-logo.png"
+                  src="https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/brand-logo.png"
                   alt="FrescoBello"
                   className="w-full h-full object-contain"
                   onError={(e) => {

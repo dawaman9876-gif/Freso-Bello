@@ -20,7 +20,7 @@ export default function Story() {
               <img
                 src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&q=80&w=1200"
                 alt="Artisanal Process"
-                className="parallax-img aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                className="parallax-img aspect-[3/4] object-cover transition-all duration-1000"
               />
             </motion.div>
             

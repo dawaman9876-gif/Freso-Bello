@@ -50,7 +50,7 @@ export default function App() {
       try {
         setCartItems(JSON.parse(savedCart));
       } catch (e) {
-        console.error('Failed to parse saved cart items', e);
+        // Silently handle error
       }
     }
   }, []);

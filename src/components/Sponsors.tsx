@@ -4,31 +4,26 @@ import { motion, AnimatePresence } from 'motion/react';
 const SPONSORS = [
   { 
     name: 'Ethiopian Airlines', 
-    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/12.png',
     photo: 'https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=800',
     description: 'Official In-flight Culinary Partner'
   },
   { 
     name: 'Hilton Addis Ababa', 
-    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/23.png',
     photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800',
     description: 'Preferred Luxury Hospitality Supplier'
   },
   { 
     name: 'Sheraton Addis', 
-    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/34.png',
     photo: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=800',
     description: 'Exclusive Banquet Pasta Provider'
   },
   { 
     name: 'Hyatt Regency', 
-    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/56.jpg',
     photo: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800',
     description: 'Artisanal Selection for Signature Dining'
   },
   { 
     name: 'Emirates', 
-    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/45.png',
     photo: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800',
     description: 'Global Export Logistics Associate'
   },
@@ -64,19 +59,6 @@ export default function Sponsors() {
                 Industry <span className="text-brand-gold italic">Titans.</span>
               </h2>
             </div>
-            
-            {/* Quick Logo Bar */}
-            <div className="flex flex-wrap gap-8 items-center opacity-40">
-              {SPONSORS.map((sponsor, i) => (
-                <button 
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  className={`h-6 transition-all duration-500 ${i === index ? 'opacity-100 scale-110' : 'hover:opacity-100 grayscale'}`}
-                >
-                  <img src={sponsor.logo} alt={sponsor.name} className="h-full object-contain brightness-0 dark:brightness-200" />
-                </button>
-              ))}
-            </div>
           </div>
 
           <div className="relative w-full h-[500px] md:h-[450px]">
@@ -97,14 +79,8 @@ export default function Sponsors() {
                     transition={{ duration: 6 }}
                     src={SPONSORS[index].photo} 
                     alt={SPONSORS[index].name}
-                    className="w-full h-full object-cover grayscale brightness-50"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-brand-gold/10 mix-blend-overlay"></div>
-                  
-                  {/* Floating ID Card */}
-                  <div className="absolute top-8 left-8 bg-brand-bg-soft p-4 shadow-2xl border border-brand-ink/5 rounded-2xl">
-                    <img src={SPONSORS[index].logo} alt={SPONSORS[index].name} className="h-10 object-contain brightness-0 dark:brightness-200" />
-                  </div>
                 </div>
 
                 {/* Data Frame */}

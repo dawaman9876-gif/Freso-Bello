@@ -78,7 +78,7 @@ export default function Hero() {
           >
             <div className="relative aspect-[4/5] rounded-[4rem] overflow-hidden premium-shadow group">
               <img
-                src="/src/assets/images/hero_pasta_premium_1784021814626.jpg"
+                src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&q=80&w=1200"
                 alt="Artisanal Pasta"
                 className="w-full h-full object-cover parallax-img"
               />

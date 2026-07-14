@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <div className="w-20 h-20 flex items-center justify-center overflow-hidden rounded-full bg-brand-bg-soft premium-shadow p-3 border border-brand-gold/10">
               <img
-                src="/logos/brand-logo.png"
+                src="https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/brand-logo.png"
                 alt="FrescoBello Brand Logo"
                 className="w-full h-full object-contain"
                 onError={(e) => {
