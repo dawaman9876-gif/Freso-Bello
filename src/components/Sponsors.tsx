@@ -4,31 +4,31 @@ import { motion, AnimatePresence } from 'motion/react';
 const SPONSORS = [
   { 
     name: 'Ethiopian Airlines', 
-    logo: '/logos/12.png',
+    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/12.png',
     photo: 'https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=800',
     description: 'Official In-flight Culinary Partner'
   },
   { 
     name: 'Hilton Addis Ababa', 
-    logo: '/logos/23.png',
+    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/23.png',
     photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800',
     description: 'Preferred Luxury Hospitality Supplier'
   },
   { 
     name: 'Sheraton Addis', 
-    logo: '/logos/34.png',
+    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/34.png',
     photo: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=800',
     description: 'Exclusive Banquet Pasta Provider'
   },
   { 
     name: 'Hyatt Regency', 
-    logo: '/logos/56.jpg',
+    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/56.jpg',
     photo: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800',
     description: 'Artisanal Selection for Signature Dining'
   },
   { 
     name: 'Emirates', 
-    logo: '/logos/45.png',
+    logo: 'https://raw.githubusercontent.com/dawaman9876-gif/Fres-Bello/main/public/logos/45.png',
     photo: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800',
     description: 'Global Export Logistics Associate'
   },
