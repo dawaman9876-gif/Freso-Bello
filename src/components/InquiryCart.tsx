@@ -9,7 +9,7 @@ import {
   Mail,
   ArrowRight,
   ShoppingBag,
-  Sparkles,
+  ShoppingCart,
   Loader2,
   Play,
   Check,
@@ -72,7 +72,6 @@ export default function InquiryCart({
     setCurrentSimStep(0);
     setSimulationCompleted(false);
 
-    // Simulated timing intervals for status updates
     const timer1 = setTimeout(() => setCurrentSimStep(1), 1500);
     const timer2 = setTimeout(() => setCurrentSimStep(2), 3000);
     const timer3 = setTimeout(() => setCurrentSimStep(3), 4500);
@@ -104,7 +103,6 @@ export default function InquiryCart({
     };
   }, [isOpen]);
 
-  // Compile beautifully formatted inquiry body
   const compileInquiryText = () => {
     let text = `Hello FrescoBello,\n\nI am compiling a B2B procurement inquiry for your premium fresh pasta offerings:\n`;
     cartItems.forEach((item, index) => {
@@ -126,7 +124,6 @@ export default function InquiryCart({
   };
 
   const handleTelegramSubmit = () => {
-    // Copy text first for convenient pasting, then open Telegram link
     const text = compileInquiryText();
     navigator.clipboard.writeText(text);
     setIsCopied(true);
@@ -151,76 +148,73 @@ export default function InquiryCart({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Dark Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black backdrop-blur-sm cursor-pointer"
-            id="cart-backdrop"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xl cursor-pointer"
           />
 
-          {/* Cart Sidebar Drawer */}
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-            className="fixed right-0 top-0 bottom-0 z-50 w-full sm:w-[480px] bg-brand-dark-green border-l border-brand-gold/15 flex flex-col justify-between shadow-2xl h-screen overflow-hidden"
-            id="cart-sidebar"
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="fixed right-0 top-0 bottom-0 z-50 w-full sm:w-[540px] bg-brand-bg flex flex-col shadow-2xl h-screen overflow-hidden border-l border-brand-ink/5"
           >
             {/* Header */}
-            <div className="p-5 border-b border-brand-gold/10 flex justify-between items-center bg-brand-medium-green/30 shrink-0">
-              <div className="flex items-center gap-2.5">
-                <ShoppingBag className="w-5 h-5 text-brand-gold" />
-                <h3 className="font-serif text-xl font-bold text-brand-cream">
-                  Inquiry Basket
-                </h3>
-                <span className="bg-brand-gold/15 text-brand-gold text-[10px] font-bold px-2 py-0.5 rounded-full font-mono border border-brand-gold/10">
-                  {cartItems.length}
-                </span>
+            <div className="p-10 border-b border-brand-ink/5 flex justify-between items-center bg-brand-bg-soft shrink-0">
+              <div className="flex items-center gap-5">
+                <div className="w-12 h-12 rounded-full bg-brand-bg premium-shadow flex items-center justify-center text-brand-gold border border-brand-ink/5">
+                  <ShoppingBag className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-2xl font-bold text-brand-ink leading-tight">
+                    Inquiry Basket
+                  </h3>
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">
+                    {cartItems.length} SELEZIONI
+                  </span>
+                </div>
               </div>
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-full hover:bg-brand-medium-green text-brand-gray hover:text-brand-cream transition-colors cursor-pointer"
-                id="close-cart-btn"
+                className="w-12 h-12 rounded-full bg-brand-bg flex items-center justify-center text-brand-ink premium-shadow hover:scale-110 transition-transform cursor-pointer border border-brand-ink/5"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Scrollable Items Container */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4 min-h-0" id="cart-items-container">
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-10 space-y-8 min-h-0">
               {isSimulating ? (
-                <div className="space-y-6 py-4" id="simulation-panel">
-                  {/* Glowing header */}
-                  <div className="text-center space-y-2 pb-4 border-b border-brand-gold/15">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-gold/10 border border-brand-gold text-brand-gold relative">
+                <div className="space-y-10 py-4">
+                  <div className="text-center space-y-4 pb-8 border-b border-brand-ink/5">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-bg-soft premium-shadow text-brand-gold relative border border-brand-ink/5">
                       {simulationCompleted ? (
-                        <Check className="w-5 h-5 text-brand-gold" />
+                        <Check className="w-8 h-8" />
                       ) : (
-                        <Loader2 className="w-5 h-5 animate-spin text-brand-gold" />
+                        <Loader2 className="w-8 h-8 animate-spin" />
                       )}
-                      <span className="absolute -inset-1 rounded-full border border-brand-gold/20 animate-ping" />
+                      {!simulationCompleted && <span className="absolute -inset-2 rounded-full border border-brand-gold/20 animate-ping" />}
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-brand-cream">
-                      {simulationCompleted ? 'B2B Simulation Finalized' : 'Processing Custom B2B Order'}
+                    <h4 className="font-serif text-3xl font-bold text-brand-ink tracking-tight">
+                      {simulationCompleted ? 'Simulation Finalized.' : 'Optimizing B2B Logistics...'}
                     </h4>
-                    <p className="text-xs text-brand-gray max-w-sm mx-auto leading-relaxed">
+                    <p className="text-sm text-brand-ink/50 max-w-sm mx-auto font-medium leading-relaxed">
                       {simulationCompleted 
                         ? 'Your procurement dossier is approved and ready for dispatch coordination.' 
                         : 'Engaging real-time machinery and scheduling state-of-the-art curing...'}
                     </p>
                   </div>
 
-                  {/* Progress bar */}
-                  <div className="space-y-1.5" id="simulation-progressbar">
-                    <div className="flex justify-between text-[10px] font-mono text-brand-gray uppercase">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-[10px] font-bold text-brand-gold uppercase tracking-[0.4em]">
                       <span>Pipeline Progress</span>
-                      <span className="text-brand-gold font-bold">{Math.round((currentSimStep / 4) * 100)}%</span>
+                      <span>{Math.round((currentSimStep / 4) * 100)}%</span>
                     </div>
-                    <div className="w-full h-2 bg-brand-medium-green/30 rounded-full overflow-hidden border border-brand-gold/5">
+                    <div className="w-full h-2 bg-brand-bg-soft rounded-full overflow-hidden border border-brand-ink/5">
                       <motion.div 
                         className="h-full bg-brand-gold" 
                         animate={{ width: `${(currentSimStep / 4) * 100}%` }}
@@ -229,8 +223,7 @@ export default function InquiryCart({
                     </div>
                   </div>
 
-                  {/* Steps list */}
-                  <div className="space-y-4 pt-2" id="simulation-steps">
+                  <div className="space-y-4">
                     {SIMULATION_STEPS.map((stepItem, idx) => {
                       const StepIcon = stepItem.icon;
                       const isCompleted = currentSimStep > idx;
@@ -239,43 +232,38 @@ export default function InquiryCart({
                       return (
                         <motion.div
                           key={idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: idx * 0.1 }}
-                          className={`p-3.5 rounded-xl border flex gap-3.5 items-start transition-all duration-300 ${
+                          className={`p-6 rounded-[2rem] border flex gap-6 items-start transition-all duration-500 ${
                             isActive 
-                              ? 'bg-brand-medium-green/50 border-brand-gold text-brand-cream ring-1 ring-brand-gold/20' 
+                              ? 'bg-brand-ink text-white premium-shadow border-brand-ink' 
                               : isCompleted 
-                              ? 'bg-brand-medium-green/10 border-brand-gold/20 text-brand-cream/80' 
-                              : 'bg-transparent border-brand-gold/5 text-brand-gray/40'
+                              ? 'bg-brand-bg-soft border-brand-gold/20' 
+                              : 'bg-brand-bg border-brand-ink/5 opacity-40'
                           }`}
                         >
-                          <div className={`p-2 rounded-lg shrink-0 ${
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 ${
                             isActive 
-                              ? 'bg-brand-gold text-brand-dark-green animate-pulse' 
+                              ? 'bg-brand-gold text-white' 
                               : isCompleted 
-                              ? 'bg-brand-gold/25 text-brand-gold' 
-                              : 'bg-brand-medium-green/20 text-brand-gray/30'
+                              ? 'bg-brand-olive text-white' 
+                              : 'bg-brand-bg-soft text-brand-ink/20'
                           }`}>
-                            <StepIcon className="w-4 h-4" />
+                            <StepIcon className="w-6 h-6" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <h5 className={`text-xs font-bold ${isActive ? 'text-brand-gold' : isCompleted ? 'text-brand-cream' : 'text-brand-cream/40'}`}>
+                            <div className="flex items-center justify-between mb-1">
+                              <h5 className="text-sm font-bold tracking-tight">
                                 {stepItem.title}
                               </h5>
                               {isCompleted && (
-                                <span className="text-[9px] uppercase font-mono text-brand-gold font-bold flex items-center gap-1">
-                                  <Check className="w-3 h-3" /> VERIFIED
-                                </span>
-                              )}
-                              {isActive && (
-                                <span className="text-[9px] uppercase font-mono text-brand-gold animate-pulse">
-                                  RUNNING...
+                                <span className="text-[9px] uppercase font-bold text-brand-gold tracking-[0.2em] flex items-center gap-1">
+                                  <Check className="w-3 h-3" /> Verified
                                 </span>
                               )}
                             </div>
-                            <p className="text-[10px] leading-relaxed mt-1 font-light text-brand-gray">
+                            <p className={`text-[11px] leading-relaxed font-medium ${isActive ? 'text-white/60' : 'text-brand-ink/40'}`}>
                               {stepItem.description}
                             </p>
                           </div>
@@ -284,65 +272,39 @@ export default function InquiryCart({
                     })}
                   </div>
 
-                  {/* Live Simulation Console */}
-                  <div className="p-3.5 rounded-xl bg-black/40 border border-brand-gold/10 font-mono text-[10px] space-y-1 text-left" id="simulation-console">
-                    <span className="text-brand-gold-light/60 font-bold block border-b border-brand-gold/5 pb-1 mb-1.5 uppercase tracking-wider text-[9px]">
-                      Live Simulation Log Stream
-                    </span>
-                    <div className="space-y-1 leading-normal text-brand-cream/90">
-                      <div><span className="text-brand-gold/50">[03:47:03]</span> INIT: B2B Pipeline session requested.</div>
-                      {currentSimStep >= 0 && (
-                        <div><span className="text-brand-gold/50">[03:47:04]</span> SPEC: Compiling {cartItems.length} custom-extruded shape layouts.</div>
-                      )}
-                      {currentSimStep >= 1 && (
-                        <div className="text-brand-gold-light"><span className="text-brand-gold/50">[03:47:05]</span> DOMINO: Contacting Domino Italy system interface. Slot secured.</div>
-                      )}
-                      {currentSimStep >= 2 && (
-                        <div className="text-brand-gold-light"><span className="text-brand-gold/50">[03:47:07]</span> COLD_CHAIN: Chilled courier dispatcher reserved to Addis Ababa hub.</div>
-                      )}
-                      {currentSimStep >= 3 && (
-                        <div className="text-green-400"><span className="text-brand-gold/50">[03:47:09]</span> COORD: Transmitting specifications folder to Tadiyos Belete.</div>
-                      )}
-                      {simulationCompleted && (
-                        <div className="text-brand-gold font-bold mt-1"><span className="text-brand-gold/50">[03:47:11]</span> COMPLETE: Pipeline simulation successful. B2B Specs validated.</div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Return Button inside simulation */}
-                  <div className="flex gap-2 pt-2">
+                  <div className="flex gap-4 pt-4">
                     <button
                       onClick={cancelSimulation}
-                      className="flex-1 py-2.5 rounded-xl border border-brand-gold/20 hover:border-brand-gold text-brand-gold text-xs font-bold uppercase tracking-wider transition-all cursor-pointer bg-brand-medium-green/10"
+                      className="flex-1 py-5 rounded-full border border-brand-ink/10 text-[10px] font-bold text-brand-ink uppercase tracking-[0.2em] transition-all hover:bg-brand-bg-soft"
                     >
                       Return to Basket
                     </button>
                     {simulationCompleted && (
                       <button
                         onClick={startSimulation}
-                        className="py-2.5 px-4 rounded-xl bg-brand-gold text-brand-dark-green hover:bg-brand-gold-light text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+                        className="w-16 h-16 rounded-full bg-brand-gold text-white flex items-center justify-center premium-shadow hover:scale-110 transition-transform"
                         title="Run Simulation Again"
                       >
-                        Re-run
+                        <Play className="w-6 h-6" />
                       </button>
                     )}
                   </div>
                 </div>
               ) : cartItems.length > 0 ? (
                 <>
-                  <div className="flex justify-between items-center" id="cart-actions-row">
-                    <span className="text-[10px] uppercase tracking-wider text-brand-gray font-semibold">
-                      Selected Pasta Shapes
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">
+                      Pasta Selections
                     </span>
                     <button
                       onClick={onClearCart}
-                      className="text-[10px] uppercase tracking-wider text-brand-red font-bold flex items-center gap-1 hover:underline transition cursor-pointer"
+                      className="text-[10px] uppercase tracking-[0.4em] text-brand-ink/40 font-bold hover:text-brand-gold transition-colors"
                     >
-                      <Trash2 className="w-3 h-3" /> Clear Basket
+                      Clear All
                     </button>
                   </div>
 
-                  <div className="space-y-3" id="cart-items-list">
+                  <div className="space-y-4">
                     {cartItems.map((item) => (
                       <motion.div
                         layout
@@ -350,38 +312,31 @@ export default function InquiryCart({
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, x: 20 }}
                         key={item.id}
-                        className="p-3.5 rounded-xl bg-brand-medium-green/40 border border-brand-gold/10 flex gap-3.5 items-center relative group hover:border-brand-gold/30 transition-all duration-300"
+                        className="p-6 rounded-[2rem] bg-brand-bg-soft border border-brand-ink/5 flex gap-6 items-center relative group hover:border-brand-gold/20 transition-all duration-500"
                       >
-                        {/* Thumbnail */}
-                        <div className="w-14 h-14 rounded-lg overflow-hidden bg-brand-dark-green shrink-0 border border-brand-gold/10">
+                        <div className="w-20 h-20 rounded-2xl overflow-hidden bg-brand-bg premium-shadow shrink-0 border border-brand-ink/5">
                           <img
                             src={item.image}
                             alt={item.name}
                             className="w-full h-full object-cover"
                             onError={(e) => {
-                              (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/14291a/d4af37?text=PB';
+                              (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/FBF9F6/B49157?text=Pasta';
                             }}
                           />
                         </div>
 
-                        {/* Title details */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-serif text-sm font-semibold text-brand-cream truncate">
+                          <h4 className="font-serif text-lg font-bold text-brand-ink tracking-tight mb-1">
                             {item.name}
                           </h4>
-                          <p className="text-[10px] text-brand-gold truncate italic font-serif">
-                            {item.subtitle}
-                          </p>
-                          <span className="text-[9px] uppercase tracking-wider text-brand-gray bg-brand-dark-green/50 px-2 py-0.5 rounded border border-brand-gold/5 mt-1 inline-block">
+                          <p className="text-[10px] text-brand-gold uppercase tracking-[0.2em] font-bold">
                             {item.tag}
-                          </span>
+                          </p>
                         </div>
 
-                        {/* Remove Action */}
                         <button
                           onClick={() => onRemoveItem(item.id)}
-                          className="p-1.5 rounded-full hover:bg-brand-red/10 text-brand-gray hover:text-brand-red transition-all cursor-pointer opacity-80 group-hover:opacity-100"
-                          title="Remove item"
+                          className="w-10 h-10 rounded-full bg-brand-bg flex items-center justify-center text-brand-ink/20 hover:text-brand-gold premium-shadow transition-all group-hover:scale-110 border border-brand-ink/5"
                         >
                           <X className="w-4 h-4" />
                         </button>
@@ -389,38 +344,36 @@ export default function InquiryCart({
                     ))}
                   </div>
 
-                  {/* Batch Insights / Order Summary */}
                   <OrderSummary cartItems={cartItems} />
 
-                  {/* Custom notes card */}
-                  <div className="pt-4 border-t border-brand-gold/10" id="cart-notes-wrapper">
-                    <label className="block text-[10px] uppercase tracking-wider text-brand-gray font-semibold mb-2">
-                      Inquiry Notes / Specific Requirements
+                  <div className="pt-8 border-t border-brand-ink/10 space-y-4">
+                    <label className="block text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold ml-6">
+                      Procurement Notes
                     </label>
                     <textarea
                       value={customMessage}
                       onChange={(e) => setCustomMessage(e.target.value)}
-                      placeholder="Specify estimated wholesale targets (e.g. 50kg weekly Pappardelle, customized extrusion, catering dropoff times, or sample delivery requests)..."
-                      className="w-full h-24 bg-brand-medium-green/20 text-brand-cream placeholder-brand-gray/40 p-3 rounded-xl border border-brand-gold/10 focus:border-brand-gold focus:outline-none text-xs leading-relaxed font-sans shadow-inner resize-none"
+                      placeholder="Specify estimated wholesale targets, catering dropoff times, or special requests..."
+                      className="w-full h-32 bg-brand-bg-soft text-brand-ink placeholder:text-brand-ink/20 p-8 rounded-[2.5rem] border border-brand-ink/5 focus:border-brand-gold/40 focus:outline-none text-sm font-medium premium-shadow resize-none"
                     />
                   </div>
                 </>
               ) : (
-                <div className="flex flex-col items-center justify-center py-20 text-center space-y-4" id="empty-cart-view">
-                  <div className="w-16 h-16 rounded-full bg-brand-medium-green/30 border border-brand-gold/15 flex items-center justify-center text-brand-gold">
-                    <ShoppingBag className="w-6 h-6" />
+                <div className="flex flex-col items-center justify-center py-40 text-center space-y-8">
+                  <div className="w-24 h-24 rounded-full bg-brand-bg-soft premium-shadow flex items-center justify-center text-brand-gold border border-brand-ink/5">
+                    <ShoppingBag className="w-10 h-10" />
                   </div>
-                  <div>
-                    <h4 className="font-serif text-base font-bold text-brand-cream">
-                      Inquiry Basket is Empty
+                  <div className="space-y-4">
+                    <h4 className="font-serif text-3xl font-bold text-brand-ink tracking-tight">
+                      Empty Basket.
                     </h4>
-                    <p className="text-xs text-brand-gray mt-1 max-w-xs mx-auto leading-relaxed font-light">
-                      Browse our premium selections of authentic durum semolina, vegetable-infused, and ancient grain pastas to construct your custom supply request!
+                    <p className="text-sm text-brand-ink/50 max-w-xs mx-auto font-medium leading-relaxed">
+                      Browse our premium collections to construct your custom supply request.
                     </p>
                   </div>
                   <button
                     onClick={onClose}
-                    className="px-5 py-2 rounded-full bg-brand-gold text-brand-dark-green text-xs font-bold uppercase tracking-wider hover:bg-brand-gold-light transition-all cursor-pointer"
+                    className="px-10 py-5 rounded-full bg-brand-ink text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-gold transition-all shadow-2xl border border-white/10"
                   >
                     Start Browsing
                   </button>
@@ -428,94 +381,79 @@ export default function InquiryCart({
               )}
             </div>
 
-            {/* Bottom Actions Panel */}
+            {/* Footer Actions */}
             {cartItems.length > 0 && (
-              <div className="p-5 border-t border-brand-gold/10 bg-brand-medium-green/20 space-y-3 shrink-0">
+              <div className="p-10 border-t border-brand-ink/5 bg-brand-bg space-y-4 shrink-0">
                 {!isSimulating ? (
                   <>
-                    {/* Primary Simulation CTA Button */}
                     <button
                       onClick={startSimulation}
-                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold hover:from-brand-gold-light hover:to-brand-gold text-brand-dark-green text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg border border-brand-gold-light/20 hover:scale-[1.01] duration-300"
-                      id="simulate-b2b-checkout-btn"
+                      className="w-full py-6 rounded-full bg-brand-gold text-white font-bold tracking-[0.2em] uppercase text-sm flex items-center justify-center gap-4 transition-all shadow-2xl hover:bg-brand-ink"
                     >
-                      <Sparkles className="w-4 h-4 animate-spin text-brand-dark-green" />
-                      Simulate Real-Time B2B Checkout
+                      <ShoppingCart className="w-5 h-5 animate-spin" />
+                      Initialize Simulation
                     </button>
 
-                    <div className="flex items-center gap-3 py-1">
-                      <div className="h-[1px] bg-brand-gold/10 flex-1"></div>
-                      <span className="text-[9px] uppercase tracking-widest text-brand-gray font-mono">Or direct channels</span>
-                      <div className="h-[1px] bg-brand-gold/10 flex-1"></div>
+                    <div className="flex items-center gap-4 py-2">
+                      <div className="h-px bg-brand-gold/20 flex-1"></div>
+                      <span className="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">Diretto</span>
+                      <div className="h-px bg-brand-gold/20 flex-1"></div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
-                      {/* WhatsApp Action */}
+                    <div className="grid grid-cols-2 gap-4">
                       <button
                         onClick={handleWhatsAppSubmit}
-                        className="py-3 px-4 rounded-xl bg-brand-red hover:bg-red-700 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                        className="py-5 rounded-full bg-brand-ink text-white text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all hover:bg-brand-gold border border-white/10"
                       >
-                        <MessageSquare className="w-4 h-4 fill-current" /> WhatsApp
+                        <MessageSquare className="w-4 h-4" /> WhatsApp
                       </button>
-
-                      {/* Telegram Action */}
                       <button
                         onClick={handleTelegramSubmit}
-                        className="py-3 px-4 rounded-xl bg-sky-950/40 text-sky-400 border border-sky-500/20 hover:bg-sky-500 hover:text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                        className="py-5 rounded-full border border-brand-ink/10 bg-brand-bg-soft text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all hover:border-brand-gold"
                       >
                         <Send className="w-4 h-4" /> Telegram
                       </button>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
-                      {/* Email Action */}
+                    <div className="grid grid-cols-2 gap-4">
                       <button
                         onClick={handleEmailSubmit}
-                        className="py-3 px-4 rounded-xl bg-brand-dark-green border border-brand-gold/10 hover:border-brand-gold text-brand-cream text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+                        className="py-5 rounded-full border border-brand-ink/10 bg-brand-bg-soft text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all hover:border-brand-gold"
                       >
                         <Mail className="w-4 h-4" /> Email Hub
                       </button>
-
-                      {/* Clipboard Action */}
                       <button
                         onClick={handleCopyClipboard}
-                        className={`py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer border ${
+                        className={`py-5 rounded-full border text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all ${
                           isCopied
-                            ? 'bg-green-950/40 text-green-400 border-green-500/30'
-                            : 'bg-brand-medium-green/40 border border-brand-gold/10 hover:border-brand-gold text-brand-cream'
+                            ? 'bg-brand-olive text-white border-brand-olive'
+                            : 'border-brand-ink/10 bg-brand-bg-soft text-brand-ink hover:border-brand-gold'
                         }`}
                       >
                         <Clipboard className="w-4 h-4" />
-                        {isCopied ? 'Copied!' : 'Copy Text'}
+                        {isCopied ? 'Copied' : 'Copy Text'}
                       </button>
                     </div>
                   </>
                 ) : (
-                  <div className="space-y-3">
-                    <p className="text-[10px] text-brand-gold text-center font-bold uppercase tracking-wider animate-pulse">
-                      Simulation Active — Do not close drawer
+                  <div className="space-y-4">
+                    <p className="text-[10px] text-brand-gold text-center font-bold uppercase tracking-[0.4em] animate-pulse">
+                      Simulation Active — Do not close
                     </p>
                     {simulationCompleted && (
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 gap-4">
                         <button
                           onClick={handleWhatsAppSubmit}
-                          className="py-3 px-4 rounded-xl bg-brand-red hover:bg-red-700 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                          className="w-full py-6 rounded-full bg-brand-gold text-white font-bold tracking-[0.2em] uppercase text-sm flex items-center justify-center gap-4 transition-all shadow-2xl hover:bg-brand-ink"
                         >
-                          <MessageSquare className="w-4 h-4 fill-current" /> WhatsApp Dispatch
-                        </button>
-                        <button
-                          onClick={handleTelegramSubmit}
-                          className="py-3 px-4 rounded-xl bg-sky-950/40 text-sky-400 border border-sky-500/20 hover:bg-sky-500 hover:text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
-                        >
-                          <Send className="w-4 h-4" /> Telegram Dispatch
+                          <MessageSquare className="w-5 h-5" /> Dispatch via WhatsApp
                         </button>
                       </div>
                     )}
                   </div>
                 )}
-
-                <p className="text-[10px] text-brand-gray text-center pt-2 leading-tight">
-                  Tadiyos Belete handles all procurement orders directly. Tapping WhatsApp or Telegram establishes active chat windows.
+                <p className="text-[9px] text-brand-ink/40 text-center font-bold uppercase tracking-[0.2em]">
+                  Handled directly by dispatch manager Tadiyos Belete.
                 </p>
               </div>
             )}
@@ -525,3 +463,4 @@ export default function InquiryCart({
     </AnimatePresence>
   );
 }
+

@@ -1,135 +1,130 @@
-import React from 'react';
 import { motion } from 'motion/react';
-import { Truck, MessageSquare, Send, Mail, MapPin, Sparkles, ChevronRight } from 'lucide-react';
+import { Truck, MessageSquare, Send, Mail, MapPin, ChevronRight } from 'lucide-react';
 
 export default function Contacts() {
   return (
-    <section id="contacts" className="py-24 bg-brand-dark-green relative overflow-hidden">
-      {/* Decorative vector background shapes */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-3xl -mr-64 -mt-64"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-3xl -ml-64 -mb-64"></div>
+    <section id="contacts" className="py-40 bg-brand-bg relative overflow-hidden transition-colors duration-500">
+      {/* Texture Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none grayscale" 
+           style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-ink) 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto px-6 relative z-10"
+      >
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <span className="text-brand-gold text-[10px] uppercase tracking-[0.4em] font-bold block mb-3">
-            Direct Access
-          </span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-brand-cream leading-[1.1]">
-            Connect with Our <br/> <span className="text-brand-gold italic">Concierge</span>
+        <div className="mb-24">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="w-12 h-px bg-brand-gold"></span>
+            <span className="text-[11px] uppercase tracking-[0.5em] text-brand-gold font-bold">
+              Contatti Diretti
+            </span>
+          </div>
+          <h2 className="font-serif text-6xl md:text-8xl font-bold text-brand-ink mt-4 leading-[0.85] tracking-tighter">
+            Let's discuss <br /> your <span className="text-brand-gold italic">Vision.</span>
           </h2>
-          <p className="mt-6 text-brand-gray text-sm md:text-base font-light max-w-lg mx-auto">
-            Our specialized teams are ready to assist with high-volume procurement, bespoke catering, or culinary inquiries.
-          </p>
         </div>
 
         {/* Contact Methods Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* WhatsApp Card */}
           <motion.a
-            href="https://wa.me/251911409015"
+            href="https://wa.me/251970715463"
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="group relative p-8 rounded-3xl bg-brand-medium-green/40 border border-brand-gold/10 hover:border-[#25D366]/40 transition-all duration-500 overflow-hidden flex flex-col items-center text-center gap-6"
+            whileHover={{ y: -10 }}
+            className="group relative p-12 bg-brand-bg-soft border border-brand-ink/5 rounded-[3rem] hover:bg-brand-gold/5 transition-all duration-700 flex flex-col gap-12 premium-shadow"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#25D366]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="w-16 h-16 rounded-2xl bg-[#25D366]/10 flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-all duration-500 shadow-lg shadow-[#25D366]/5">
-              <MessageSquare className="w-8 h-8 fill-current" />
-            </div>
-            <div className="space-y-2 relative z-10">
-              <h3 className="text-brand-cream font-bold text-lg">WhatsApp</h3>
-              <p className="text-brand-gray text-xs font-light">Instant Procurement Support</p>
-              <div className="pt-2">
-                <span className="text-brand-gold text-sm font-mono tracking-tight font-medium">+251 911 409 015</span>
+            <div className="flex justify-between items-start">
+              <div className="w-16 h-16 rounded-full bg-brand-gold text-white flex items-center justify-center premium-shadow group-hover:scale-110 transition-transform">
+                <MessageSquare className="w-8 h-8" />
               </div>
+              <span className="text-[10px] font-bold text-brand-gold tracking-[0.4em]">CANALE 01</span>
             </div>
-            <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#25D366] font-bold group-hover:gap-3 transition-all">
-              Chat Now <ChevronRight className="w-3 h-3" />
+            <div>
+              <h3 className="text-brand-ink font-serif font-bold text-4xl tracking-tight mb-4">WhatsApp</h3>
+              <p className="text-brand-ink/40 text-sm font-medium uppercase tracking-widest leading-loose">Instant Logistics & Private Support</p>
+            </div>
+            <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">
+              Dispatch Request <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </div>
           </motion.a>
 
           {/* Telegram Card */}
           <motion.a
-            href="https://t.me/frescobellopasta"
+            href="https://t.me/Woldab12"
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="group relative p-8 rounded-3xl bg-brand-medium-green/40 border border-brand-gold/10 hover:border-[#0088cc]/40 transition-all duration-500 overflow-hidden flex flex-col items-center text-center gap-6"
+            whileHover={{ y: -10 }}
+            className="group relative p-12 bg-brand-bg-soft border border-brand-ink/5 rounded-[3rem] hover:bg-brand-gold/5 transition-all duration-700 flex flex-col gap-12 premium-shadow"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0088cc]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="w-16 h-16 rounded-2xl bg-[#0088cc]/10 flex items-center justify-center text-[#0088cc] group-hover:bg-[#0088cc] group-hover:text-white transition-all duration-500 shadow-lg shadow-[#0088cc]/5">
-              <Send className="w-8 h-8" />
-            </div>
-            <div className="space-y-2 relative z-10">
-              <h3 className="text-brand-cream font-bold text-lg">Telegram</h3>
-              <p className="text-brand-gray text-xs font-light">Direct Channel Access</p>
-              <div className="pt-2">
-                <span className="text-brand-gold text-sm font-mono tracking-tight font-medium">@frescobellopasta</span>
+            <div className="flex justify-between items-start">
+              <div className="w-16 h-16 rounded-full bg-brand-gold text-white flex items-center justify-center premium-shadow group-hover:scale-110 transition-transform">
+                <Send className="w-8 h-8" />
               </div>
+              <span className="text-[10px] font-bold text-brand-gold tracking-[0.4em]">CANALE 02</span>
             </div>
-            <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#0088cc] font-bold group-hover:gap-3 transition-all">
-              Join Channel <ChevronRight className="w-3 h-3" />
+            <div>
+              <h3 className="text-brand-ink font-serif font-bold text-4xl tracking-tight mb-4">Telegram</h3>
+              <p className="text-brand-ink/40 text-sm font-medium uppercase tracking-widest leading-loose">Automated Production Feeds</p>
+            </div>
+            <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">
+              Access Pipeline <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </div>
           </motion.a>
 
           {/* Email Card */}
           <motion.a
             href="mailto:frescobellopasta@gmail.com"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="group relative p-8 rounded-3xl bg-brand-medium-green/40 border border-brand-gold/10 hover:border-[#EA4335]/40 transition-all duration-500 overflow-hidden flex flex-col items-center text-center gap-6"
+            whileHover={{ y: -10 }}
+            className="group relative p-12 bg-brand-bg-soft border border-brand-ink/5 rounded-[3rem] hover:bg-brand-gold/5 transition-all duration-700 flex flex-col gap-12 premium-shadow"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#EA4335]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="w-16 h-16 rounded-2xl bg-[#EA4335]/10 flex items-center justify-center text-[#EA4335] group-hover:bg-[#EA4335] group-hover:text-white transition-all duration-500 shadow-lg shadow-[#EA4335]/5">
-              <Mail className="w-8 h-8" />
-            </div>
-            <div className="space-y-2 relative z-10">
-              <h3 className="text-brand-cream font-bold text-lg">Email</h3>
-              <p className="text-brand-gray text-xs font-light">Official Correspondence</p>
-              <div className="pt-2">
-                <span className="text-brand-gold text-sm font-mono tracking-tight font-medium">frescobellopasta</span>
+            <div className="flex justify-between items-start">
+              <div className="w-16 h-16 rounded-full bg-brand-gold text-white flex items-center justify-center premium-shadow group-hover:scale-110 transition-transform">
+                <Mail className="w-8 h-8" />
               </div>
+              <span className="text-[10px] font-bold text-brand-gold tracking-[0.4em]">CANALE 03</span>
             </div>
-            <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#EA4335] font-bold group-hover:gap-3 transition-all">
-              Inquire <ChevronRight className="w-3 h-3" />
+            <div>
+              <h3 className="text-brand-ink font-serif font-bold text-4xl tracking-tight mb-4">Inquiries</h3>
+              <p className="text-brand-ink/40 text-sm font-medium uppercase tracking-widest leading-loose">Corporate & B2B Procurements</p>
+            </div>
+            <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">
+              Submit Dossier <ChevronRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </div>
           </motion.a>
 
         </div>
 
         {/* Location & Delivery Info */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          <div className="p-6 rounded-3xl bg-brand-medium-green/20 border border-brand-gold/5 flex items-center gap-6">
-            <div className="w-12 h-12 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
-              <MapPin className="w-6 h-6" />
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-px bg-brand-ink/10 border border-brand-ink/5 rounded-[3rem] overflow-hidden premium-shadow">
+          <div className="p-12 bg-brand-bg-soft/80 backdrop-blur-md flex items-center gap-10">
+            <div className="w-20 h-20 rounded-full bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold shrink-0">
+              <MapPin className="w-10 h-10" />
             </div>
-            <div className="space-y-1">
-              <h4 className="text-brand-cream font-bold text-sm">Addis Ababa Laboratory</h4>
-              <p className="text-brand-gray text-xs font-light">Premium Production Facility & Distribution Hub, Ethiopia</p>
+            <div className="space-y-2">
+              <h4 className="text-brand-ink font-serif font-bold text-2xl tracking-tight">Addis Ababa Laboratory</h4>
+              <p className="text-brand-ink/40 text-[10px] uppercase tracking-[0.4em] font-bold">Production Hub, Ethiopia</p>
             </div>
           </div>
-          <div className="p-6 rounded-3xl bg-brand-medium-green/20 border border-brand-gold/5 flex items-center gap-6">
-            <div className="w-12 h-12 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
-              <Truck className="w-6 h-6" />
+          <div className="p-12 bg-brand-bg-soft/80 backdrop-blur-md flex items-center gap-10 border-l border-brand-ink/5">
+            <div className="w-20 h-20 rounded-full bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold shrink-0">
+              <Truck className="w-10 h-10" />
             </div>
-            <div className="space-y-1">
-              <h4 className="text-brand-cream font-bold text-sm">Commercial Logistics</h4>
-              <p className="text-brand-gray text-xs font-light">Temperature-monitored fleet serving major hotels & airlines.</p>
+            <div className="space-y-2">
+              <h4 className="text-brand-ink font-serif font-bold text-2xl tracking-tight">Fleet Logistics</h4>
+              <p className="text-brand-ink/40 text-[10px] uppercase tracking-[0.4em] font-bold">Bespoke Cold-Chain Dispatch</p>
             </div>
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }
+

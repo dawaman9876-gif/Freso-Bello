@@ -26,7 +26,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'pasta',
     tag: '500g | Fresh',
     image: 'https://i.pinimg.com/736x/52/56/40/52564099c83ab73ccff4227c04a6e9a7.jpg',
-    basePricePerKg: 1250.00
+    basePricePerKg: 950.00
   },
   {
     id: 'bulk-lasagna',
@@ -36,7 +36,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'stuffed',
     tag: 'Bulk Catering',
     image: 'https://i.pinimg.com/736x/d6/41/bb/d641bb9b88d8c77e827d7f157bcf5835.jpg',
-    basePricePerKg: 1800.00
+    basePricePerKg: 1350.00
   },
   {
     id: 'marinara-sauce',
@@ -46,7 +46,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'sauce',
     tag: 'Gourmet Sauce',
     image: 'https://images.unsplash.com/photo-1600803681822-639a035a9675?auto=format&fit=crop&q=80&w=800',
-    basePricePerKg: 1500.00
+    basePricePerKg: 1150.00
   },
   {
     id: 'beetroot-infused',
@@ -56,7 +56,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'infused',
     tag: 'Vibrant Beetroot',
     image: 'https://i.postimg.cc/V6vyLf0T/Beetroot-Tagliatelle.png',
-    basePricePerKg: 1450.00
+    basePricePerKg: 1100.00
   },
   {
     id: 'pesto-alla-genovese',
@@ -66,7 +66,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'sauce',
     tag: 'Fresh Pesto',
     image: 'https://images.unsplash.com/photo-1595187123982-f59787e91f09?auto=format&fit=crop&q=80&w=800',
-    basePricePerKg: 2200.00
+    basePricePerKg: 1650.00
   },
   {
     id: 'carrot-infused',
@@ -76,7 +76,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'infused',
     tag: 'Carrot Blend',
     image: 'https://i.postimg.cc/X7y5h9qq/2.jpg',
-    basePricePerKg: 1450.00
+    basePricePerKg: 1100.00
   },
   {
     id: 'catering-kit-large',
@@ -86,7 +86,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'stuffed',
     tag: 'Catering Kit',
     image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800',
-    basePricePerKg: 25000.00
+    basePricePerKg: 19500.00
   },
   {
     id: 'whole-grain',
@@ -96,7 +96,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'grains',
     tag: 'Whole Grain',
     image: 'https://i.postimg.cc/c483jfC4/3.jpg',
-    basePricePerKg: 1300.00
+    basePricePerKg: 980.00
   },
   {
     id: 'barley-ribbon',
@@ -106,7 +106,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'grains',
     tag: 'Barley Ribbon',
     image: 'https://i.postimg.cc/HjGF2bvs/Barley-Ribbon.png',
-    basePricePerKg: 1350.00
+    basePricePerKg: 1000.00
   },
   {
     id: 'durum-semolina',
@@ -116,7 +116,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'pasta',
     tag: '100% Semolina',
     image: 'https://i.postimg.cc/DmVRg1pv/Pure-Durum-Semolina.png',
-    basePricePerKg: 1150.00
+    basePricePerKg: 850.00
   },
   {
     id: 'gourmet-ravioli',
@@ -126,7 +126,7 @@ export const PRODUCTS_DATA: Product[] = [
     category: 'stuffed',
     tag: 'Gourmet',
     image: 'https://i.postimg.cc/fLy4TzSg/Gourmet-Ravioli.png',
-    basePricePerKg: 1950.00
+    basePricePerKg: 1450.00
   }
 ];
 

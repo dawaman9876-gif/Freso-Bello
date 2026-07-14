@@ -15,13 +15,22 @@ export default function Feedback() {
   };
 
   return (
-    <section id="feedback" className="py-24 bg-brand-medium-green/30 relative">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="glass-panel rounded-3xl overflow-hidden shadow-2xl relative">
-          {/* Decorative background accent */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+    <section id="feedback" className="py-40 bg-brand-bg relative overflow-hidden transition-colors duration-500">
+      {/* Decorative Ornaments */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent"></div>
+      
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-4xl mx-auto px-6"
+      >
+        <div className="relative bg-brand-bg-soft rounded-[4rem] overflow-hidden border border-brand-ink/5 premium-shadow">
+          {/* Background Accent */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
           
-          <div className="p-8 md:p-12 relative z-10">
+          <div className="p-12 md:p-20 relative z-10">
             <AnimatePresence mode="wait">
               {!submitted ? (
                 <motion.div
@@ -29,27 +38,27 @@ export default function Feedback() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="space-y-10"
+                  className="space-y-12"
                 >
-                  <div className="text-center space-y-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-gold/10 text-brand-gold mb-2">
-                      <MessageSquareQuote className="w-6 h-6" />
+                  <div className="text-center space-y-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-bg premium-shadow text-brand-gold mb-4 border border-brand-ink/5">
+                      <MessageSquareQuote className="w-8 h-8" />
                     </div>
-                    <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-cream">
-                      Share Your Experience
+                    <h2 className="font-serif text-5xl md:text-6xl font-bold text-brand-ink tracking-tighter">
+                      Share your <span className="text-brand-gold italic">Experience.</span>
                     </h2>
-                    <p className="text-brand-gray max-w-md mx-auto text-sm md:text-base font-light">
-                      Your feedback fuels our culinary innovation. Tell us how we are doing.
+                    <p className="text-brand-ink/60 max-w-md mx-auto text-lg font-medium leading-relaxed">
+                      Your feedback fuels our culinary innovation. Tell us about your journey with our pasta.
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-8">
+                  <form onSubmit={handleSubmit} className="space-y-12">
                     {/* Rating Stars */}
-                    <div className="flex flex-col items-center gap-3">
-                      <span className="text-[10px] uppercase tracking-widest text-brand-gold/60 font-bold">
-                        Rate our Quality
+                    <div className="flex flex-col items-center gap-6">
+                      <span className="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold">
+                        Le Nostre Stelle
                       </span>
-                      <div className="flex gap-2">
+                      <div className="flex gap-4">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <button
                             key={star}
@@ -57,51 +66,53 @@ export default function Feedback() {
                             onMouseEnter={() => setHoveredRating(star)}
                             onMouseLeave={() => setHoveredRating(0)}
                             onClick={() => setRating(star)}
-                            className="transition-all duration-300 transform hover:scale-125"
+                            className="transition-all duration-300 transform hover:scale-125 focus:outline-none"
                           >
                             <Star
-                              className={`w-10 h-10 md:w-12 md:h-12 ${
+                              className={`w-12 h-12 transition-all duration-500 ${
                                 star <= (hoveredRating || rating)
-                                  ? 'fill-brand-gold text-brand-gold'
+                                  ? 'fill-brand-gold text-brand-gold drop-shadow-[0_0_10px_rgba(180,145,87,0.3)]'
                                   : 'text-brand-gold/20'
                               }`}
                             />
                           </button>
                         ))}
                       </div>
-                      {rating > 0 && (
-                        <motion.span 
-                          initial={{ opacity: 0 }} 
-                          animate={{ opacity: 1 }}
-                          className="text-brand-gold text-xs font-mono"
-                        >
-                          {rating === 5 ? 'Exceptional' : rating === 4 ? 'Great' : rating === 3 ? 'Good' : rating === 2 ? 'Fair' : 'Needs Improvement'}
-                        </motion.span>
-                      )}
+                      <AnimatePresence>
+                        {rating > 0 && (
+                          <motion.span 
+                            initial={{ opacity: 0, y: -10 }} 
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-brand-gold text-sm font-bold uppercase tracking-widest"
+                          >
+                            {rating === 5 ? 'Eccellente' : rating === 4 ? 'Ottimo' : rating === 3 ? 'Buono' : rating === 2 ? 'Discreto' : 'Migliorabile'}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
                     </div>
 
                     {/* Comment Area */}
-                    <div className="space-y-2">
-                      <label htmlFor="feedback-comment" className="text-[10px] uppercase tracking-widest text-brand-gold/60 font-bold ml-1">
-                        Any specific thoughts?
+                    <div className="space-y-4">
+                      <label htmlFor="feedback-comment" className="text-[10px] uppercase tracking-[0.4em] text-brand-gold font-bold ml-6">
+                        Pensieri e Commenti
                       </label>
                       <textarea
                         id="feedback-comment"
-                        rows={4}
+                        rows={5}
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
-                        placeholder="Tell us about the texture, flavor, or service..."
-                        className="w-full bg-brand-dark-green/50 border border-brand-gold/10 rounded-2xl p-4 text-brand-cream placeholder:text-brand-gray/30 focus:border-brand-gold/40 focus:ring-0 transition-all outline-none text-sm md:text-base"
+                        placeholder="Tell us about the texture, the al dente bite, or our service..."
+                        className="w-full bg-brand-bg border border-brand-ink/5 rounded-[2.5rem] p-8 text-brand-ink placeholder:text-brand-ink/20 focus:border-brand-gold/40 focus:ring-0 transition-all outline-none text-lg font-medium premium-shadow"
                       ></textarea>
                     </div>
 
                     <button
                       type="submit"
                       disabled={rating === 0}
-                      className="w-full py-4 rounded-2xl bg-brand-gold text-brand-dark-green font-bold uppercase tracking-widest text-sm hover:bg-brand-gold-light transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-brand-gold/10 flex items-center justify-center gap-2 group"
+                      className="w-full py-6 rounded-full bg-brand-ink text-white font-bold uppercase tracking-[0.2em] text-sm hover:bg-brand-gold transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-2xl flex items-center justify-center gap-4 group border border-white/10"
                     >
-                      <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      Submit Review
+                      <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      Invia Feedback
                     </button>
                   </form>
                 </motion.div>
@@ -110,33 +121,36 @@ export default function Feedback() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12 space-y-6"
+                  className="text-center py-12 space-y-8"
                 >
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-gold/10 text-brand-gold mb-4">
-                    <CheckCircle2 className="w-10 h-10" />
+                  <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-brand-olive text-white mb-4 premium-shadow border border-white/10">
+                    <CheckCircle2 className="w-12 h-12" />
                   </div>
-                  <h3 className="font-serif text-3xl font-bold text-brand-cream">
-                    Thank You!
-                  </h3>
-                  <p className="text-brand-gray max-w-sm mx-auto leading-relaxed">
-                    Your feedback has been recorded in our quality control logs. We appreciate your contribution to the FrescoBello legacy.
-                  </p>
+                  <div className="space-y-4">
+                    <h3 className="font-serif text-5xl font-bold text-brand-ink tracking-tighter">
+                      Grazie Mille.
+                    </h3>
+                    <p className="text-brand-ink/60 max-w-sm mx-auto text-lg font-medium leading-relaxed">
+                      Your contribution has been recorded. We appreciate your role in the FrescoBello legacy.
+                    </p>
+                  </div>
                   <button
                     onClick={() => {
                       setSubmitted(false);
                       setRating(0);
                       setComment('');
                     }}
-                    className="text-brand-gold text-xs uppercase tracking-widest font-bold border-b border-brand-gold/20 hover:border-brand-gold transition-all pb-1"
+                    className="text-brand-gold text-[10px] uppercase tracking-[0.4em] font-bold border-b border-brand-gold/20 hover:border-brand-gold transition-all pb-2"
                   >
-                    Send another response
+                    Scrivi un altro
                   </button>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
+

@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 const SPONSORS = [
   { 
     name: 'Ethiopian Airlines', 
-    logo: '12.png',
+    logo: '/logos/12.png',
     photo: 'https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=800',
     description: 'Official In-flight Culinary Partner'
   },
   { 
     name: 'Hilton Addis Ababa', 
-    logo: '23.png',
+    logo: '/logos/23.png',
     photo: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800',
     description: 'Preferred Luxury Hospitality Supplier'
   },
   { 
     name: 'Sheraton Addis', 
-    logo: '34.png',
+    logo: '/logos/34.png',
     photo: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=800',
     description: 'Exclusive Banquet Pasta Provider'
   },
   { 
     name: 'Hyatt Regency', 
-    logo: '45.png',
+    logo: '/logos/56.jpg',
     photo: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=800',
     description: 'Artisanal Selection for Signature Dining'
   },
   { 
     name: 'Emirates', 
-    logo: '56.jpg',
+    logo: '/logos/45.png',
     photo: 'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800',
     description: 'Global Export Logistics Associate'
   },
@@ -45,163 +45,112 @@ export default function Sponsors() {
   }, []);
 
   return (
-    <section className="py-20 bg-brand-dark-green relative overflow-hidden border-t border-brand-gold/10">
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="flex flex-col items-center gap-12">
-          
-          {/* Section Header & Persistent Logo Bar */}
-          <div className="text-center space-y-8 w-full">
-            <div className="space-y-2">
-              <span className="text-[10px] uppercase tracking-[0.4em] text-brand-gold/60 font-bold block">
-                Strategic Alliances
+    <section className="py-32 bg-brand-bg relative overflow-hidden border-t border-brand-ink/5 transition-colors duration-500">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto px-6 relative z-10"
+      >
+        
+        <div className="flex flex-col gap-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="max-w-xl">
+              <span className="text-brand-gold text-xs uppercase tracking-[0.4em] font-black block">
+                STRATEGIC ALLIANCES
               </span>
-              <h3 className="text-brand-cream font-serif text-2xl md:text-3xl font-bold">
-                Trusted by Global Industry Titans
-              </h3>
+              <h2 className="font-serif text-5xl md:text-6xl font-bold text-brand-ink mt-4 leading-[0.9] tracking-tighter">
+                Industry <span className="text-brand-gold italic">Titans.</span>
+              </h2>
             </div>
-
-            {/* Original Logos Row */}
-            <div className="max-w-4xl mx-auto px-8 py-6 rounded-[2rem] bg-brand-medium-green/10 border border-brand-gold/5 flex flex-wrap justify-center items-center gap-8 md:gap-16 transition-all duration-500 backdrop-blur-sm">
+            
+            {/* Quick Logo Bar */}
+            <div className="flex flex-wrap gap-8 items-center opacity-40">
               {SPONSORS.map((sponsor, i) => (
                 <button 
                   key={i}
                   onClick={() => setIndex(i)}
-                  className={`h-8 md:h-10 transition-all duration-500 relative group/logo ${i === index ? 'scale-110 opacity-100' : 'opacity-30 hover:opacity-100'}`}
+                  className={`h-6 transition-all duration-500 ${i === index ? 'opacity-100 scale-110' : 'hover:opacity-100 grayscale'}`}
                 >
-                  <img 
-                    src={sponsor.logo} 
-                    alt={sponsor.name}
-                    className={`h-full object-contain transition-all duration-500 ${i === index ? 'drop-shadow-[0_0_8px_rgba(255,215,0,0.3)]' : 'grayscale brightness-200'}`}
-                    referrerPolicy="no-referrer"
-                  />
-                  {i === index && (
-                    <motion.div 
-                      layoutId="active-logo-glow"
-                      className="absolute -inset-4 bg-brand-gold/5 rounded-2xl -z-10"
-                    />
-                  )}
+                  <img src={sponsor.logo} alt={sponsor.name} className="h-full object-contain brightness-0 dark:brightness-200" />
                 </button>
               ))}
             </div>
           </div>
-          
-          <div className="relative w-full max-w-5xl h-[500px] md:h-[400px] flex items-center justify-center">
+
+          <div className="relative w-full h-[500px] md:h-[450px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.98, x: 20 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 1.02, x: -20 }}
-                transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                className="w-full h-full flex flex-col md:flex-row items-center gap-8 md:gap-12 bg-brand-medium-green/20 rounded-[3rem] p-8 md:p-10 border border-brand-gold/10 overflow-hidden group shadow-[0_32px_64px_-15px_rgba(0,0,0,0.5)]"
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 0.8, ease: 'circOut' }}
+                className="absolute inset-0 grid grid-cols-1 md:grid-cols-12 bg-brand-bg-soft border border-brand-ink/5 overflow-hidden shadow-2xl rounded-[3rem] premium-shadow"
               >
-                {/* Photo Section with Logo Overlay */}
-                <div className="w-full md:w-1/2 h-56 md:h-full rounded-[2.5rem] overflow-hidden relative shrink-0 shadow-2xl">
+                {/* Visual Frame */}
+                <div className="md:col-span-7 relative h-64 md:h-full overflow-hidden">
                   <motion.img 
-                    initial={{ scale: 1.2 }}
+                    initial={{ scale: 1.1 }}
                     animate={{ scale: 1 }}
-                    transition={{ duration: 5 }}
+                    transition={{ duration: 6 }}
                     src={SPONSORS[index].photo} 
                     alt={SPONSORS[index].name}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover grayscale brightness-50"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-green/60 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-brand-gold/10 mix-blend-overlay"></div>
                   
-                  {/* Floating Logo Overlay */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="absolute top-6 left-6 md:top-8 md:left-8 w-20 h-20 md:w-24 md:h-24 bg-white/95 backdrop-blur-xl rounded-3xl p-4 shadow-2xl flex items-center justify-center"
-                  >
-                    <img 
-                      src={SPONSORS[index].logo} 
-                      alt={SPONSORS[index].name}
-                      className="w-full h-full object-contain"
-                      referrerPolicy="no-referrer"
-                    />
-                  </motion.div>
+                  {/* Floating ID Card */}
+                  <div className="absolute top-8 left-8 bg-brand-bg-soft p-4 shadow-2xl border border-brand-ink/5 rounded-2xl">
+                    <img src={SPONSORS[index].logo} alt={SPONSORS[index].name} className="h-10 object-contain brightness-0 dark:brightness-200" />
+                  </div>
                 </div>
 
-                {/* Info Section */}
-                <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-6 md:gap-8">
-                  <div className="space-y-6 w-full">
-                    <div className="flex flex-col items-center md:items-start gap-4">
-                      <div className="h-12 md:h-16">
-                        <img 
-                          src={SPONSORS[index].logo} 
-                          alt={SPONSORS[index].name}
-                          className="h-full object-contain"
-                          referrerPolicy="no-referrer"
-                        />
-                      </div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-[10px] uppercase tracking-widest font-bold">
-                        <span className="w-1 h-1 rounded-full bg-brand-gold animate-pulse"></span>
-                        Verified Partner
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <h4 className="text-3xl md:text-5xl font-serif font-bold text-brand-gold leading-tight">
-                        {SPONSORS[index].name}
-                      </h4>
-                      <p className="text-brand-cream/90 text-lg md:text-xl font-light tracking-wide italic leading-relaxed max-w-lg">
-                        "{SPONSORS[index].description}"
-                      </p>
-                    </div>
+                {/* Data Frame */}
+                <div className="md:col-span-5 p-12 flex flex-col justify-between border-l border-brand-ink/5">
+                  <div className="space-y-8">
+                    <span className="font-mono text-[10px] text-brand-gold uppercase tracking-[0.5em] font-bold">Partnership {index.toString().padStart(2, '0')}</span>
+                    <h4 className="font-serif text-4xl font-bold text-brand-ink tracking-tighter leading-[0.9]">
+                      {SPONSORS[index].name}
+                    </h4>
+                    <p className="text-brand-ink/50 text-sm font-medium leading-relaxed">
+                      {SPONSORS[index].description}
+                    </p>
                   </div>
-                  
-                  <div className="flex items-center gap-6 pt-4 border-t border-brand-gold/10 w-full justify-center md:justify-start">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-brand-gray font-bold">
-                      Strategic <br/> Alliances
-                    </span>
-                    <div className="w-[1px] h-8 bg-brand-gold/20"></div>
-                    <div className="flex gap-4">
-                      {/* Small decorative indicators */}
-                      <div className="w-2 h-2 rounded-full bg-brand-gold/20"></div>
-                      <div className="w-2 h-2 rounded-full bg-brand-gold/40"></div>
-                      <div className="w-2 h-2 rounded-full bg-brand-gold/60"></div>
-                    </div>
+
+                  <div className="flex items-center gap-4 pt-8 border-t border-brand-ink/10">
+                    <div className="w-2 h-2 bg-brand-gold animate-pulse"></div>
+                    <span className="text-[10px] font-bold text-brand-gold uppercase tracking-[0.3em]">Operational Logistics Hub</span>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Progress Indicators */}
-          <div className="flex gap-4">
+          {/* Timeline Indicators */}
+          <div className="flex gap-2 justify-center">
             {SPONSORS.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setIndex(i)}
-                className="relative h-1 w-12 bg-brand-gold/10 rounded-full overflow-hidden transition-all group"
+                className="group relative h-1 w-16 bg-brand-ink/10 overflow-hidden rounded-full"
               >
                 {i === index && (
                   <motion.div
-                    layoutId="progress"
+                    layoutId="sponsor-progress"
                     className="absolute inset-0 bg-brand-gold"
                     initial={{ x: "-100%" }}
                     animate={{ x: "0%" }}
                     transition={{ duration: 5, ease: "linear" }}
                   />
                 )}
-                <div className={`absolute inset-0 bg-brand-gold transition-opacity duration-300 ${i === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-30'}`} />
+                <div className={`absolute inset-0 bg-brand-gold transition-opacity duration-300 ${i === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'}`} />
               </button>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Background Ambience */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.1"/>
-          </pattern>
-          <rect width="100" height="100" fill="url(#grid)" />
-        </svg>
-      </div>
+      </motion.div>
     </section>
   );
 }

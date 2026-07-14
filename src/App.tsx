@@ -9,6 +9,7 @@ import WhyChooseUs from './components/WhyChooseUs';
 import Products from './components/Products';
 import Sponsors from './components/Sponsors';
 import Feedback from './components/Feedback';
+import OrderStatus from './components/OrderStatus';
 import Contacts from './components/Contacts';
 import Footer from './components/Footer';
 import InquiryCart from './components/InquiryCart';
@@ -19,9 +20,30 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Load cart and theme from localStorage on mount
+  // Initialize theme from localStorage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('frescobello_theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setIsDarkMode(true);
+    }
+  }, []);
+
+  // Update root class and localStorage when theme changes
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('frescobello_theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('frescobello_theme', 'light');
+    }
+  }, [isDarkMode]);
+
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
+  // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem('frescobello_inquiry_cart');
     if (savedCart) {
@@ -31,26 +53,7 @@ export default function App() {
         console.error('Failed to parse saved cart items', e);
       }
     }
-
-    const savedTheme = localStorage.getItem('frescobello_theme');
-    if (savedTheme === 'light') {
-      setTheme('light');
-    }
   }, []);
-
-  // Update HTML element class on theme changes
-  useEffect(() => {
-    if (theme === 'light') {
-      document.documentElement.classList.add('light');
-    } else {
-      document.documentElement.classList.remove('light');
-    }
-    localStorage.setItem('frescobello_theme', theme);
-  }, [theme]);
-
-  const handleToggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
 
   // Sync cart to localStorage on changes
   const saveCart = (items: Product[]) => {
@@ -114,40 +117,29 @@ export default function App() {
   };
 
   return (
-    <div className={`bg-brand-dark-green text-brand-cream font-sans antialiased selection:bg-brand-gold selection:text-brand-dark-green min-h-screen flex flex-col justify-between overflow-x-hidden grain-overlay ${theme}`}>
+    <div className="bg-brand-bg text-brand-ink font-sans antialiased min-h-screen flex flex-col justify-between overflow-x-hidden relative">
+      <div className="fixed inset-0 texture-overlay pointer-events-none opacity-20 z-[1]"></div>
       
       {/* Fixed Branded Header */}
       <Header
         cartCount={cartItems.length}
         onOpenCart={() => setIsCartOpen(true)}
-        theme={theme}
-        onToggleTheme={handleToggleTheme}
+        isDarkMode={isDarkMode}
+        toggleTheme={toggleTheme}
       />
 
       {/* Main Single-Screen Scrollable Layout */}
-      <main className="flex-1">
-        {/* Dynamic Hero Area */}
+      <main className="flex-1 relative z-10">
         <Hero />
-
-        {/* Narrative / History Spotlight */}
         <Story />
-
-        {/* Dynamic Grid of Value Statements */}
         <WhyChooseUs />
-
-        {/* Global Partners Carousel */}
         <Sponsors />
-
-        {/* Interactive Products Directory with Search and Basket triggers */}
         <Products
           onAddProduct={handleAddItem}
           addedProductIds={cartItems.map((item) => item.id)}
         />
-
-        {/* Customer Voice Section */}
         <Feedback />
-
-        {/* Direct Contact Grids & Headquarter Information */}
+        <OrderStatus />
         <Contacts />
       </main>
 
@@ -167,19 +159,19 @@ export default function App() {
       <AnimatePresence>
         {toastMessage && (
           <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 left-6 z-50 p-4 rounded-xl bg-brand-medium-green/95 border border-brand-gold/30 text-brand-cream text-xs font-semibold tracking-wider uppercase flex items-center gap-3 shadow-2xl glass-panel max-w-sm"
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-8 left-8 z-[100] p-5 rounded-2xl bg-brand-bg border border-brand-gold/20 text-brand-ink text-sm font-medium flex items-center gap-4 shadow-2xl premium-shadow max-w-sm"
             id="app-toast-hud"
           >
-            <div className="w-5 h-5 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold shrink-0">
-              <Check className="w-3.5 h-3.5" />
+            <div className="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+              <Check className="w-5 h-5" />
             </div>
-            <span className="flex-1 text-left">{toastMessage}</span>
+            <span className="flex-1">{toastMessage}</span>
             <button
               onClick={() => setToastMessage(null)}
-              className="text-brand-gray hover:text-brand-cream transition-colors cursor-pointer"
+              className="text-brand-ink/30 hover:text-brand-gold transition-colors cursor-pointer p-2"
             >
               <X className="w-4 h-4" />
             </button>
@@ -191,16 +183,16 @@ export default function App() {
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 15, scale: 0.9 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={scrollToTop}
-            className="fixed bottom-6 right-6 z-40 p-3.5 rounded-full bg-brand-medium-green/80 border border-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-brand-dark-green transition-all duration-300 shadow-xl cursor-pointer"
+            className="fixed bottom-8 right-8 z-[90] p-5 rounded-full bg-brand-ink text-white shadow-2xl cursor-pointer hover:bg-brand-gold transition-all duration-500 group border border-white/10"
             title="Scroll to Top"
             id="scroll-to-top-btn"
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
           </motion.button>
         )}
       </AnimatePresence>

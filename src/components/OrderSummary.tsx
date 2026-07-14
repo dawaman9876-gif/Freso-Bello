@@ -53,14 +53,14 @@ export default function OrderSummary({ cartItems }: OrderSummaryProps) {
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-5 rounded-2xl bg-brand-medium-green/30 border border-brand-gold/15 space-y-4"
+      className="p-5 rounded-none bg-brand-charcoal/30 border border-brand-red/15 space-y-4"
       id="order-summary-container"
     >
       <div className="flex items-center justify-between">
-        <span className="text-[10px] uppercase tracking-widest text-brand-gold font-bold flex items-center gap-1.5">
-          <Layers className="w-3.5 h-3.5 animate-pulse text-brand-gold" /> B2B Batch Insights
+        <span className="text-[10px] uppercase tracking-widest text-brand-red font-bold flex items-center gap-1.5">
+          <Layers className="w-3.5 h-3.5 animate-pulse text-brand-red" /> B2B Batch Insights
         </span>
-        <span className="text-[10px] text-brand-gray/80 font-mono font-medium bg-brand-dark-green/60 px-2 py-0.5 rounded border border-brand-gold/5">
+        <span className="text-[10px] text-brand-silver/80 font-mono font-medium bg-brand-dark/60 px-2 py-0.5 rounded border border-brand-red/5">
           PROSPECTIVE
         </span>
       </div>
@@ -68,31 +68,31 @@ export default function OrderSummary({ cartItems }: OrderSummaryProps) {
       {/* Grid containing calculated summaries */}
       <div className="grid grid-cols-2 gap-3" id="order-summary-metrics">
         {/* Metric 1: Count and weight */}
-        <div className="p-3.5 rounded-xl bg-brand-dark-green/80 border border-brand-gold/5 space-y-1">
-          <span className="text-[9px] uppercase tracking-wider text-brand-gray block">
+        <div className="p-3.5 rounded-none bg-brand-dark/80 border border-brand-red/5 space-y-1">
+          <span className="text-[9px] uppercase tracking-wider text-brand-silver block">
             Selected Shapes
           </span>
           <div className="flex items-baseline gap-1.5">
-            <span className="font-serif text-xl sm:text-2xl font-bold text-brand-cream">
+            <span className="font-serif text-xl sm:text-2xl font-bold text-brand-white">
               {totalCount}
             </span>
-            <span className="text-xs text-brand-gold font-serif italic">
+            <span className="text-xs text-brand-red font-serif italic">
               ({weightEstimateKg.toFixed(1)} kg est.)
             </span>
           </div>
         </div>
 
         {/* Metric 2: Estimated prep time */}
-        <div className="p-3.5 rounded-xl bg-brand-dark-green/80 border border-brand-gold/5 space-y-1">
-          <span className="text-[9px] uppercase tracking-wider text-brand-gray block">
+        <div className="p-3.5 rounded-none bg-brand-dark/80 border border-brand-red/5 space-y-1">
+          <span className="text-[9px] uppercase tracking-wider text-brand-silver block">
             Est. Dispatch Time
           </span>
           <div className="flex items-baseline gap-1">
-            <span className="font-serif text-lg sm:text-xl font-bold text-brand-cream">
+            <span className="font-serif text-lg sm:text-xl font-bold text-brand-white">
               {days > 0 ? `${days}d ` : ''}
               {remainingHours > 0 ? `${remainingHours}h` : ''}
             </span>
-            <span className="text-[9px] text-brand-gold/80 font-mono">
+            <span className="text-[9px] text-brand-red/80 font-mono">
               ({totalHours}h)
             </span>
           </div>
@@ -100,52 +100,52 @@ export default function OrderSummary({ cartItems }: OrderSummaryProps) {
       </div>
 
       {/* Projected production pipeline timeline */}
-      <div className="space-y-2.5 pt-2 border-t border-brand-gold/10" id="order-summary-pipeline">
-        <span className="text-[9px] uppercase tracking-wider text-brand-gray font-semibold block">
+      <div className="space-y-2.5 pt-2 border-t border-brand-red/10" id="order-summary-pipeline">
+        <span className="text-[9px] uppercase tracking-wider text-brand-silver font-semibold block">
           Artisanal Production Pipeline (Projected)
         </span>
         
-        <div className="relative pl-4 border-l border-brand-gold/15 space-y-4 text-left">
+        <div className="relative pl-4 border-l border-brand-red/15 space-y-4 text-left">
           {/* Step 1: Mixing */}
           <div className="relative" id="pipeline-step-mixing">
-            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-brand-gold border border-brand-dark-green"></span>
-            <h5 className="text-[11px] font-bold text-brand-cream leading-tight">
+            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-none bg-brand-red border border-brand-dark"></span>
+            <h5 className="text-[11px] font-bold text-brand-white leading-tight">
               1. Blending & Hydration
             </h5>
-            <p className="text-[10px] text-brand-gray leading-tight">
+            <p className="text-[10px] text-brand-silver leading-tight">
               Slow hydration of premium durum semolina under Italian standards.
             </p>
           </div>
 
           {/* Step 2: Extrusion */}
           <div className="relative" id="pipeline-step-extrusion">
-            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-brand-gold border border-brand-dark-green"></span>
-            <h5 className="text-[11px] font-bold text-brand-cream leading-tight">
+            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-none bg-brand-red border border-brand-dark"></span>
+            <h5 className="text-[11px] font-bold text-brand-white leading-tight">
               2. Bronze Die Extrusion
             </h5>
-            <p className="text-[10px] text-brand-gray leading-tight">
+            <p className="text-[10px] text-brand-silver leading-tight">
               Continuous uniform extrusion using our Domino Italy machinery.
             </p>
           </div>
 
           {/* Step 3: Curing */}
           <div className="relative" id="pipeline-step-curing">
-            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-brand-gold/30 border border-brand-dark-green animate-pulse"></span>
-            <h5 className="text-[11px] font-bold text-brand-cream leading-tight flex items-center gap-1.5">
-              3. Slow Temperature Curing <Clock className="w-3 h-3 text-brand-gold animate-spin" />
+            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-none bg-brand-red/30 border border-brand-dark animate-pulse"></span>
+            <h5 className="text-[11px] font-bold text-brand-white leading-tight flex items-center gap-1.5">
+              3. Slow Temperature Curing <Clock className="w-3 h-3 text-brand-red animate-spin" />
             </h5>
-            <p className="text-[10px] text-brand-gray leading-tight">
+            <p className="text-[10px] text-brand-silver leading-tight">
               Controlled curing phase for optimal al dente texture elasticity.
             </p>
           </div>
 
           {/* Step 4: Dispatch */}
           <div className="relative" id="pipeline-step-dispatch">
-            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-brand-gold/15 border border-brand-dark-green"></span>
-            <h5 className="text-[11px] font-bold text-brand-cream/60 leading-tight">
+            <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-none bg-brand-red/15 border border-brand-dark"></span>
+            <h5 className="text-[11px] font-bold text-brand-white/60 leading-tight">
               4. Cold-Pack & Addis Ababa Delivery
             </h5>
-            <p className="text-[10px] text-brand-gray/50 leading-tight">
+            <p className="text-[10px] text-brand-silver/50 leading-tight">
               Quality assurance inspection and direct chilled dispatch routing.
             </p>
           </div>
@@ -153,10 +153,10 @@ export default function OrderSummary({ cartItems }: OrderSummaryProps) {
       </div>
 
       {/* Dynamic friendly advisory info block */}
-      <div className="p-3 rounded-xl bg-brand-gold/5 border border-brand-gold/10 flex items-start gap-2.5" id="order-summary-advisory">
-        <AlertCircle className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-        <p className="text-[10px] text-brand-gray leading-relaxed font-light">
-          Production speeds are optimized via our imported <strong>Domino</strong> machine. Timelines are finalized during coordination with Business Development Manager <strong className="text-brand-cream">Tadiyos Belete</strong>.
+      <div className="p-3 rounded-none bg-brand-red/5 border border-brand-red/10 flex items-start gap-2.5" id="order-summary-advisory">
+        <AlertCircle className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
+        <p className="text-[10px] text-brand-silver leading-relaxed font-light">
+          Production speeds are optimized via our imported <strong>Domino</strong> machine. Timelines are finalized during coordination with Business Development Manager <strong className="text-brand-white">Tadiyos Belete</strong>.
         </p>
       </div>
     </motion.div>

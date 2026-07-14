@@ -5,207 +5,168 @@ import { Menu, X, ShoppingCart, MessageSquare, ChevronRight, Sun, Moon } from 'l
 interface HeaderProps {
   cartCount: number;
   onOpenCart: () => void;
-  theme: 'dark' | 'light';
-  onToggleTheme: () => void;
+  isDarkMode: boolean;
+  toggleTheme: () => void;
 }
 
-export default function Header({ cartCount, onOpenCart, theme, onToggleTheme }: HeaderProps) {
+export default function Header({ cartCount, onOpenCart, isDarkMode, toggleTheme }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Smooth background change on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   const navLinks = [
-    { name: 'Home', href: '#hero' },
-    { name: 'Our Story', href: '#story' },
-    { name: 'Why FrescoBello', href: '#why-choose-us' },
-    { name: 'Our Products', href: '#products' },
-    { name: 'Direct Contacts', href: '#contacts' },
+    { name: 'Heritage', href: '#story' },
+    { name: 'Craft', href: '#why-choose-us' },
+    { name: 'Collection', href: '#products' },
+    { name: 'Inquiry', href: '#contacts' },
   ];
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b ${
-          isScrolled
-            ? 'bg-brand-dark-green/95 backdrop-blur-md py-3 shadow-lg border-brand-gold/10'
-            : 'bg-brand-dark-green/80 backdrop-blur-sm py-4 border-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+          isScrolled ? 'py-4' : 'py-8'
         }`}
         id="app-header"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-          {/* Brand Identity with Red & Gold logo alignment */}
-          <a href="#" className="flex items-center gap-3 md:gap-4 group shrink-0" id="header-logo">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-brand-gold flex items-center justify-center overflow-hidden bg-brand-medium-green gold-glow transition-transform duration-500 group-hover:scale-105">
-              <img
-                src="https://i.postimg.cc/gjzYxvF4/frasko.jpg"
-                alt="FrescoBello Logo"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/14291a/d4af37?text=FB';
-                }}
-              />
-            </div>
-            <div>
-              <span className="font-serif text-xl md:text-2xl lg:text-3xl font-extrabold tracking-widest block leading-tight">
-                <span className="text-brand-red">FRESCO</span>
-                <span className="text-brand-gold">BELLO</span>
-              </span>
-              <span className="block text-[8px] md:text-[9px] uppercase tracking-[0.25em] text-brand-cream/70 font-sans">
-                Premium Pasta & Catering
-              </span>
-            </div>
-          </a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center justify-end flex-1 gap-6 lg:gap-10 pl-8 lg:pl-16">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-brand-cream/80 text-xs lg:text-sm font-medium tracking-wider uppercase hover:text-brand-gold transition-colors relative group py-2"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
-          </nav>
-
-          {/* Actions & Basket */}
-          <div className="flex items-center gap-2 md:gap-4 shrink-0 ml-4">
-            {/* Theme Toggle Button */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={onToggleTheme}
-              className="p-2.5 rounded-full bg-brand-medium-green/80 border border-brand-gold/20 hover:border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-dark-green transition-all duration-300 cursor-pointer flex items-center justify-center"
-              title={theme === 'dark' ? 'Switch to Accessible Light Theme' : 'Switch to Default Dark Theme'}
-              id="header-theme-toggle-btn"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </motion.button>
-
-            {/* Inquiry Cart Button */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={onOpenCart}
-              className="relative p-2.5 rounded-full bg-brand-medium-green/80 border border-brand-gold/20 hover:border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-dark-green transition-all duration-300 cursor-pointer flex items-center justify-center"
-              title="View Inquiry Basket"
-              id="header-cart-btn"
-            >
-              <ShoppingCart className="w-5 h-5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-brand-red text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border border-brand-dark-green animate-pulse">
-                  {cartCount}
+        <div className="max-w-7xl mx-auto px-6">
+          <nav
+            className={`flex items-center justify-between px-8 py-3 rounded-full transition-all duration-700 ${
+              isScrolled 
+                ? 'frosted-glass premium-shadow' 
+                : 'bg-transparent border border-transparent'
+            }`}
+          >
+            {/* Brand Logo */}
+            <a href="#" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 overflow-hidden transition-transform duration-500 group-hover:rotate-12">
+                <img
+                  src="/logos/brand-logo.png"
+                  alt="FrescoBello"
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/141414/B49157?text=FB';
+                  }}
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl font-bold tracking-tighter leading-none text-brand-ink">
+                  Fresco<span className="text-brand-gold italic">Bello</span>
                 </span>
-              )}
-            </motion.button>
+                <span className="text-[8px] uppercase tracking-[0.3em] font-semibold text-brand-gold">
+                  Artigianato Italiano
+                </span>
+              </div>
+            </a>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={toggleMobileMenu}
-              className="md:hidden p-2 text-brand-cream hover:text-brand-gold transition-colors cursor-pointer"
-              id="mobile-menu-toggle-btn"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-12">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-ink/60 hover:text-brand-gold transition-colors relative group"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-brand-gold transition-all duration-500 group-hover:w-full"></span>
+                </a>
+              ))}
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-4 md:gap-6">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={toggleTheme}
+                className="p-2.5 rounded-full bg-brand-bg-soft border border-brand-ink/5 text-brand-gold premium-shadow hover:bg-brand-ink hover:text-white transition-all duration-500 cursor-pointer"
+                title={isDarkMode ? 'Switch to Light' : 'Switch to Dark'}
+              >
+                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={onOpenCart}
+                className="relative p-2.5 rounded-full bg-brand-bg-soft border border-brand-ink/5 text-brand-ink hover:text-brand-gold transition-colors cursor-pointer"
+              >
+                <ShoppingCart className="w-4 h-4" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-brand-gold text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </motion.button>
+
+              <button
+                onClick={() => window.open('https://wa.me/251970715463', '_blank')}
+                className="hidden lg:block px-8 py-3 bg-brand-ink text-white text-[10px] font-bold tracking-[0.2em] uppercase rounded-full hover:bg-brand-gold transition-all duration-500 border border-white/10"
+              >
+                Direct Inquiry
+              </button>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="md:hidden p-2 text-brand-ink"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+            </div>
+          </nav>
         </div>
       </header>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-brand-dark-green/98 backdrop-blur-md flex flex-col justify-center items-center gap-6 md:hidden"
-            id="mobile-menu-overlay"
+            className="fixed inset-0 z-[100] bg-brand-bg/98 backdrop-blur-xl flex flex-col items-center justify-center p-12 text-center"
           >
-            {/* Close button inside mobile menu */}
             <button
-              onClick={toggleMobileMenu}
-              className="absolute top-5 right-5 p-2 text-brand-cream hover:text-brand-gold transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-12 right-12 p-4 text-brand-ink"
             >
-              <X className="w-8 h-8" />
+              <X className="w-10 h-10" />
             </button>
 
-            {/* Links with staggered visual animation */}
-            <div className="flex flex-col items-center gap-6" id="mobile-nav-links">
+            <div className="space-y-8">
               {navLinks.map((link, idx) => (
                 <motion.a
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
                   key={link.name}
                   href={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-brand-cream text-2xl font-serif tracking-wide hover:text-brand-gold transition-colors block py-2"
+                  className="block font-serif text-5xl font-bold tracking-tighter text-brand-ink hover:text-brand-gold transition-colors"
                 >
                   {link.name}
                 </motion.a>
               ))}
-
+              
               <motion.button
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
+                transition={{ delay: 0.4 }}
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   onOpenCart();
                 }}
-                className="mt-4 px-6 py-2.5 rounded-full bg-brand-medium-green/80 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-dark-green text-sm font-bold tracking-wider flex items-center gap-2 transition-all"
+                className="mt-12 flex items-center gap-4 text-brand-gold font-bold uppercase tracking-widest text-sm"
               >
-                <ShoppingCart className="w-4 h-4" /> View Inquiry Basket ({cartCount})
+                <ShoppingCart className="w-5 h-5" /> Basket ({cartCount})
               </motion.button>
-
-              <motion.button
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: (navLinks.length + 0.5) * 0.1 }}
-                onClick={() => {
-                  onToggleTheme();
-                }}
-                className="mt-2 px-6 py-2.5 rounded-full bg-brand-medium-green/80 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-dark-green text-sm font-bold tracking-wider flex items-center gap-2 transition-all cursor-pointer"
-              >
-                {theme === 'dark' ? (
-                  <>
-                    <Sun className="w-4 h-4" /> Light Contrast Mode
-                  </>
-                ) : (
-                  <>
-                    <Moon className="w-4 h-4" /> Default Dark Mode
-                  </>
-                )}
-              </motion.button>
-
-              <motion.a
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: (navLinks.length + 1) * 0.1 }}
-                href="https://wa.me/251970715463"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-8 py-3 rounded-full bg-brand-gold text-brand-dark-green font-bold tracking-wider hover:bg-brand-gold-light transition-all text-sm flex items-center gap-2 mt-2"
-              >
-                <MessageSquare className="w-4 h-4" /> WhatsApp Inquiry
-              </motion.a>
             </div>
           </motion.div>
         )}
@@ -213,3 +174,4 @@ export default function Header({ cartCount, onOpenCart, theme, onToggleTheme }: 
     </>
   );
 }
+
